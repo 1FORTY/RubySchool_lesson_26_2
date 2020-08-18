@@ -3,7 +3,10 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
-db = SQLite3::Database.new 'barbershop.db'
+configure do
+  @db = SQLite3::Database.new 'barbershop.db'
+  @db.execute "create table if not exists 'users' ('id' intenger primary key autoincrement, 'username' text, 'phone' intenger, 'datestamp' text, 'barber' text, 'color' text);"
+end
 
 get '/' do
 	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"			
