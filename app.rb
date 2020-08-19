@@ -87,5 +87,8 @@ post '/contacts' do
 end
 
 get '/showusers' do
-  erb "Hello World"
+  @db = get_db
+  @result = @db.execute "select * from users order by id desc"
+
+  erb :showusers
 end
